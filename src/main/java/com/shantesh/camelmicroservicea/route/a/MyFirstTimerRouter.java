@@ -17,7 +17,8 @@ public class MyFirstTimerRouter extends RouteBuilder {
 
 
         from("timer:first-timer")//queue
-                .transform().constant("My constant value")
+//                .transform().constant("My constant value")
+                .transform().constant("Time is now:" + LocalDateTime.now())
                 .to("log:first-timer");//database
     }
 
