@@ -21,9 +21,12 @@ public class MyFirstTimerRouter extends RouteBuilder {
 
 
         from("timer:first-timer")//queue
-//                .transform().constant("My constant value")
+        		.log("${body}")// before transforming the body
+                .transform().constant("My constant value")
+                .log("${body}")// after first transforming the body
 //                .transform().constant("Time is now:" + LocalDateTime.now())
                 .bean(getCurrentTimeBean, "getCurrentTime1")
+                .log("${body}")// after transforming the body in a bean method
                 .to("log:first-timer");//database
     }
 
