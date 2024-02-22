@@ -28,7 +28,7 @@ public class MyFirstTimerRouter extends RouteBuilder {
 
         from("timer:first-timer")//queue
         		.log("${body}")// before transforming the body
-                .transform().constant("My constant value")
+                .transform().constant("message body changed to -->My constant value")
                 .log("${body}")// after first transforming the body
 //                .transform().constant("Time is now:" + LocalDateTime.now())
                 .bean(getCurrentTimeBean, "getCurrentTime1")
@@ -49,7 +49,7 @@ public class MyFirstTimerRouter extends RouteBuilder {
 @Component
 class GetCurrentTimeBean{
     public String getCurrentTime1(){
-        return "Time is  he heheheh" + LocalDateTime.now();
+        return "message body changed AGAIN to --->-->Time is  he heheheh" + LocalDateTime.now();
     }
 }
 
@@ -58,7 +58,7 @@ class SimpleLoggingProcessingComponent {
 	private Logger logger = LoggerFactory.getLogger(SimpleLoggingProcessingComponent.class);
 
 	public void process(String message) {
-		logger.info("SimpleLoggingProcessingComponent--->---> {}", message);
+		logger.info("message body DID NOT get changed but processed in a bean way as @component anntn is there==> SimpleLoggingProcessingComponent--->---> {}", message);
 	}
 }
 
@@ -67,7 +67,7 @@ class SimpleLoggingProcessor implements Processor {
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
-		logger.info("SimpleLoggingProcessor---> {}", exchange.getMessage().getBody());
+		logger.info("message body DID NOT get changed but processed in a normal class and object creation/Processor implementing way as @component anntn is NOT there==>SimpleLoggingProcessor---> {}", exchange.getMessage().getBody());
 	}
 
 	
