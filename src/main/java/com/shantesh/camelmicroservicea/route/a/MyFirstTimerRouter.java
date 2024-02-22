@@ -23,7 +23,7 @@ public class MyFirstTimerRouter extends RouteBuilder {
         from("timer:first-timer")//queue
 //                .transform().constant("My constant value")
 //                .transform().constant("Time is now:" + LocalDateTime.now())
-                .bean(getCurrentTimeBean)
+                .bean(getCurrentTimeBean, "getCurrentTime1")
                 .to("log:first-timer");//database
     }
 
@@ -32,7 +32,7 @@ public class MyFirstTimerRouter extends RouteBuilder {
 
 @Component
 class GetCurrentTimeBean{
-    public String getCurrentTime(){
-        return "Time is  " + LocalDateTime.now();
+    public String getCurrentTime1(){
+        return "Time is  he heheheh" + LocalDateTime.now();
     }
 }
